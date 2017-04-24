@@ -1,0 +1,58 @@
+<!-- Extending the Meta data master view -->
+
+
+<!-- Adding the content to the master view -->
+<?php $__env->startSection('content'); ?>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Welcome, <?php echo e(Session::get('name')); ?></div>
+    <div class="panel-body">
+
+      <!-- Displaying info that a new post has been added or deleted -->
+      <?php if(Session::has('info')): ?>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="alert alert-info"><?php echo e(Session::get('info')); ?></p>
+          </div>
+        </div>
+      <?php endif; ?>
+
+      <!-- Links for new post and Logout -->
+      <a class="btn btn-success" href = <?php echo e(route('addNewNote')); ?>>Add New Note</a>
+      <a class="btn btn-danger" href = <?php echo e(route('logout')); ?>>Logout</a>
+
+      <!-- Iterating and displaying all the posts for that users -->
+      <div class="well">
+      <?php foreach($notes as $note): ?>
+        <div class="col-sm-12 note-container">
+          <div class="col-sm-8">
+            <!-- Formating the create_at date using Carbon facade -->
+            <p class="note-title"> <?php echo e($note->title); ?> (Created by <?php echo e(Session::get('name')); ?> User, <?php echo e($note->created_at->setTimezone('-05:00')->format('D H:i')); ?> )</p>
+          </div>
+          <div class="col-sm-2 pull-right">
+            <form method="post">
+              <input type="hidden" name="id" value="<?php echo e($note->id); ?>">
+              <input type="submit" class="btn btn-primary" value="Edit" name="edit" formaction="<?php echo e(route('editNote')); ?>">
+              <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure want to delete?');" name="delete" formaction="<?php echo e(route('deleteNote')); ?>">
+            </form>
+          </div>
+          <div class="col-sm-12">
+            <p class="title-description"><?php echo e($note->description); ?></p>
+          </div>
+      </div>
+      <?php endforeach; ?>
+
+      <!-- Laravel Pagination -->
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <?php echo $notes->render(); ?>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

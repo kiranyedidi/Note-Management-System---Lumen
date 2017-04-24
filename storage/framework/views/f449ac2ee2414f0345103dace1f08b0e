@@ -1,0 +1,28 @@
+<!-- View to display the note to update -->
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('partials.errors', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Add Note</div>
+        <div class="panel-body">
+          <div class="row">
+              <div class="col-md-12">
+                  <form action="<?php echo e(route('postEditedNote')); ?>" method="post">
+                      <div class="form-group">
+                          <label for="title">Title</label>
+                          <input type="text" class="form-control" id="title" value="<?php echo e($note->title); ?>" name="title">
+                      </div>
+                      <div class="form-group">
+                          <label for="content">Description</label>
+                          <input type="text" class="form-control" id="description" value="<?php echo e($note->description); ?>" name="description">
+                      </div>
+                      <input type="hidden" name="id" value="<?php echo e($note->id); ?>">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button class="btn btn-danger" onclick="event.preventDefault(); window.location.href='<?php echo e(route('fetchNotes')); ?>'">Cancel</button>
+                  </form>
+              </div>
+          </div>
+        </div>
+      </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
