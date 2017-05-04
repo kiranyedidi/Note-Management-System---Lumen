@@ -1,8 +1,8 @@
 # Note-Management-System---Lumen
 
-This repository contains souce code files for the web application, a system where a user can create, edit, delete, fetch his/her posts.
+This repository contains souce code files for the Note Management application, a system where a user can create, edit, delete, fetch his/her notes.
 
-# Default account used for the project
+# DB account used for the project
 
 # Database: `c1`
 
@@ -30,5 +30,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `updated_at`, `created_a
 
 1. Clone/download this repo and run composer install to install the required dependencies.
 1. Run a PHP local developement server (php -S localhost:8000 -t public) or any other server you are comfortable with.
-2. Install MySQL server using XAMPP, WAMP or LAMP (Configuration ser in .env file : user - 'root' and password - '') and create database c1 (this DB is setup in the .env file) and the users table by running the above queries
+2. Install MySQL server using XAMPP, WAMP or LAMP (Configuration settings are saved in .env file : user - 'root' and password - '') and create database c1 (this DB is setup in the .env file) and the users table by running the above queries
 4. Run mirgations (php artisan migrate), which will create a table structure for Notes table.
+5. Now you are ready to run the application.
